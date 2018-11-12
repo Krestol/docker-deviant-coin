@@ -19,4 +19,4 @@ RUN chmod +x ./src/leveldb/build_detect_platform && ./share/genbuild.sh && make
 
 #run daemon
 RUN cd .. && mkdir ./chain
-RUN ./Source/src/deviantd -datadir=./chain
+RUN ./Source/src/deviantd -datadir=./chain -gen -staking
