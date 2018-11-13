@@ -2,7 +2,7 @@ FROM ubuntu:16.10
 MAINTAINER kotik <obrbkru@apriorit.com>
 
 #install custom packages
-RUN add-apt-repository ppa:bitcoin/bitcoin
+RUN add-apt-repository -y ppa:bitcoin/bitcoin
 RUN apt-get -q update && apt-get install build-essential libtool autotools-dev autoconf pkg-config libssl-dev libevent-dev automake
 RUN apt-get install libboost-all-dev
 RUN apt-get install libdb4.8-dev libdb4.8++-dev
