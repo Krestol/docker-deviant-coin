@@ -13,6 +13,8 @@ RUN apt-get install -y git
 RUN git clone https://github.com/Deviantcoin/Source.git && cd ./Source && git checkout code_correction
 
 #configure
+#install bsdmainutils for fixing "hexdump is required for tests"
+RUN apt-get install -y bsdmainutils 
 RUN cd ./Source && chmod +x autogen.sh && ./autogen.sh && ./configure --with-gui=no
 
 #build
