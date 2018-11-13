@@ -13,10 +13,10 @@ RUN apt-get install -y git
 RUN git clone https://github.com/Deviantcoin/Source.git && cd ./Source && git checkout code_correction
 
 #configure
-RUN chmod +x autogen.sh && ./autogen.sh && ./configure --with-gui=no
+RUN cd ./Source && chmod +x autogen.sh && ./autogen.sh && ./configure --with-gui=no
 
 #build
-RUN chmod +x ./src/leveldb/build_detect_platform && ./share/genbuild.sh && make
+RUN chmod +x ./Source/src/leveldb/build_detect_platform && ./Source/share/genbuild.sh && make
 
 #run daemon
 WORKDIR /chain
