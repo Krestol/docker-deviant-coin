@@ -3,11 +3,11 @@ MAINTAINER kotik <obrbkru@apriorit.com>
 
 #install custom packages
 RUN apt-get -q update
-RUN apt-get install software-properties-common && add-apt-repository -y ppa:bitcoin/bitcoin
-RUN apt-get update && apt-get install build-essential libtool autotools-dev autoconf pkg-config libssl-dev libevent-dev automake
-RUN apt-get install libboost-all-dev
-RUN apt-get install libdb4.8-dev libdb4.8++-dev
-RUN apt-get install git
+RUN apt-get install -y software-properties-common && add-apt-repository -y ppa:bitcoin/bitcoin
+RUN apt-get update && apt-get install -y build-essential libtool autotools-dev autoconf pkg-config libssl-dev libevent-dev automake
+RUN apt-get install -y libboost-all-dev
+RUN apt-get install -y libdb4.8-dev libdb4.8++-dev
+RUN apt-get install -y git
 
 #Download and build Deviant coin from branch code_correction
 RUN git clone https://github.com/Deviantcoin/Source.git && git checkout code_correction
