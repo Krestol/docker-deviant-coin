@@ -2,8 +2,9 @@ FROM ubuntu:18.10
 MAINTAINER kotik <obrbkru@apriorit.com>
 
 #install custom packages
+RUN apt-get -q update
 RUN apt-get install software-properties-common && add-apt-repository -y ppa:bitcoin/bitcoin
-RUN apt-get -q update && apt-get install build-essential libtool autotools-dev autoconf pkg-config libssl-dev libevent-dev automake
+RUN apt-get update && apt-get install build-essential libtool autotools-dev autoconf pkg-config libssl-dev libevent-dev automake
 RUN apt-get install libboost-all-dev
 RUN apt-get install libdb4.8-dev libdb4.8++-dev
 RUN apt-get install git
