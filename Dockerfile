@@ -4,7 +4,7 @@ MAINTAINER kotik <obrbkru@apriorit.com>
 #install custom packages
 RUN apt-get -q update
 RUN apt-get install -y software-properties-common && add-apt-repository -y ppa:bitcoin/bitcoin
-RUN apt-get update && apt-get install -y build-essential libtool autotools-dev autoconf pkg-config libssl-dev libevent-dev automake
+RUN apt-get update && apt-get install -y build-essential libtool autotools-dev autoconf pkg-config libevent-dev automake
 RUN apt-get install -y libboost-all-dev
 RUN apt-get install -y libdb4.8-dev libdb4.8++-dev
 RUN apt-get install -y git
@@ -12,10 +12,14 @@ RUN apt-get install -y git
 #Download and build Deviant coin from branch code_correction
 RUN git clone https://github.com/Deviantcoin/Source.git && cd ./Source && git checkout code_correction
 
+#build openssl, PIVX support just openssl 1.0
+RUN wget http://www.openssl.org/source/openssl-1.0.0a.tar.gz && tar xf "$libcxx.tar.xz" 
+RUN cd openssl-1.0.0a && ./config && make && make install
+
 #configure
 #install bsdmainutils for fixing "hexdump is required for tests"
 RUN apt-get install -y bsdmainutils 
-RUN cd ./Source && chmod +x autogen.sh && ./autogen.sh && ./configure --with-gui=no
+RUN cd ./Source && chmod +x autogen.sh && ./autogen.sh && ./configure --with-gui=no --with-unsupported-ssl
 
 #build
 RUN chmod +x ./Source/src/leveldb/build_detect_platform && ./Source/share/genbuild.sh && make
