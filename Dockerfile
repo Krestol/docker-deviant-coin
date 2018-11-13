@@ -1,4 +1,4 @@
-FROM ubuntu:16.10
+FROM ubuntu:18.10
 MAINTAINER kotik <obrbkru@apriorit.com>
 
 #install custom packages
