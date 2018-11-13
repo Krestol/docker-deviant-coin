@@ -19,4 +19,9 @@ RUN cd ./Source && chmod +x autogen.sh && ./autogen.sh && ./configure --with-gui
 RUN chmod +x ./src/leveldb/build_detect_platform && ./share/genbuild.sh && make
 
 #run daemon
-CMD cd ~ && mkdir ./chain && ./Source/src/deviantd -datadir=./chain -gen -staking
+WORKDIR /chain
+VOLUME ["/chain"]
+CMD cd ~ && mkdir ./chain && ./Source/src/deviantd -datadir=/chain -gen -staking
+#command to run container docker run -d -v ~/chain:/chain
+#it mounts host folder ~/chain to container
+
