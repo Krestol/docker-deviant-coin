@@ -20,7 +20,7 @@ RUN cd openssl-1.0.0a && ./config && make && make install
 #configure
 #install bsdmainutils for fixing "hexdump is required for tests"
 RUN apt-get install -y bsdmainutils 
-RUN cd ./Source && chmod +x autogen.sh && ./autogen.sh && ./configure --with-gui=no --with-unsupported-ssl
+RUN cd ./Source && chmod +x autogen.sh && ./autogen.sh && ./configure --with-gui=no
 
 #build
 RUN chmod +x ./Source/src/leveldb/build_detect_platform && ./Source/share/genbuild.sh && make
