@@ -10,10 +10,10 @@ RUN apt-get install -y libdb4.8-dev libdb4.8++-dev
 RUN apt-get install -y git
 
 #Download and build Deviant coin from branch code_correction
-RUN git clone https://github.com/Deviantcoin/Source.git && git checkout code_correction
+RUN git clone https://github.com/Deviantcoin/Source.git && cd ./Source && git checkout code_correction
 
 #configure
-RUN cd ./Source && chmod +x autogen.sh && ./autogen.sh && ./configure --with-gui=no
+RUN chmod +x autogen.sh && ./autogen.sh && ./configure --with-gui=no
 
 #build
 RUN chmod +x ./src/leveldb/build_detect_platform && ./share/genbuild.sh && make
