@@ -40,7 +40,7 @@ RUN chmod +x ./Source/src/leveldb/build_detect_platform && chmod +x ./Source/sha
 #run daemon
 WORKDIR /chain
 VOLUME ["/chain"]
-CMD cd ~ && mkdir ./chain && ./Source/src/deviantd -datadir=/chain -gen -staking
+CMD cp ./docker-deviant-coin/resources/deviant.conf /chain && cd ~ && mkdir ./chain && ./Source/src/deviantd -datadir=/chain -gen -staking
 #command to run container docker run -d -v ~/chain:/chain
 #it mounts host folder ~/chain to container
 
