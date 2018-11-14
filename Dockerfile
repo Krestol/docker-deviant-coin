@@ -14,8 +14,8 @@ RUN git clone https://github.com/Deviantcoin/Source.git && cd ./Source && git ch
 
 #build openssl, PIVX support just openssl 1.0
 RUN apt-get install -y wget
-RUN wget https://www.openssl.org/source/openssl-1.01f.tar.gz && tar xf openssl-1.01f.tar.gz 
-RUN cd openssl-1.01f && ./config && make && make install_sw
+RUN wget https://www.openssl.org/source/openssl-1.0.1f.tar.gz && tar xf openssl-1.0.1f.tar.gz 
+RUN cd openssl-1.0.1f && ./config && make && make install_sw
 
 #configure
 #install bsdmainutils for fixing "hexdump is required for tests"
