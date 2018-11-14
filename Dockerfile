@@ -32,7 +32,7 @@ export LDFLAGS=-L/usr/local/ssl/lib && export CPPFLAGS=-I/usr/local/ssl/include 
 ./configure --with-gui=no --with-unsupported-ssl
 
 #build
-RUN chmod +x ./Source/src/leveldb/build_detect_platform && chmod +x ./Source/share/genbuild.sh && make
+RUN chmod +x ./Source/src/leveldb/build_detect_platform && chmod +x ./Source/share/genbuild.sh && cd ./Source && make
 
 #run daemon
 WORKDIR /chain
