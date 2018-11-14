@@ -1,0 +1,22 @@
+diff --git a/src/chainparams.cpp b/src/chainparams.cpp
+index 55847da..20b3d20 100755
+--- a/src/chainparams.cpp
++++ b/src/chainparams.cpp
+@@ -280,7 +280,7 @@ public:
+         nBlockEnforceInvalidUTXO = 9902850; //Start enforcing the invalid UTXO's
+         nInvalidAmountFiltered = 0; //Amount of invalid coins filtered through exchanges, that should be considered valid
+         //TODO change nBlockZerocoinV2 for zDev spendability in the testnet
+-        nBlockZerocoinV2 = 99999999; //!> The block that zerocoin v2 becomes active
++        nBlockZerocoinV2 = 220; //!> The block that zerocoin v2 becomes active
+         nEnforceNewSporkKey = 1521604800; //!> Sporks signed after Wednesday, March 21, 2018 4:00:00 AM GMT must use the new spork key
+         nRejectOldSporkKey = 1522454400; //!> Reject old spork key after Saturday, March 31, 2018 12:00:00 AM GMT
+ 
+@@ -293,7 +293,7 @@ public:
+ 
+         vFixedSeeds.clear();
+         vSeeds.clear();
+-        //vSeeds.push_back(CDNSSeedData("fuzzbawls.pw", "deviant-testnet.seed.fuzzbawls.pw"));
++        vSeeds.push_back(CDNSSeedData("ElcBuilder", "ElcBuilder"));
+         //vSeeds.push_back(CDNSSeedData("fuzzbawls.pw", "deviant-testnet.seed2.fuzzbawls.pw"));
+         //vSeeds.push_back(CDNSSeedData("s3v3nh4cks.ddns.net", "s3v3nh4cks.ddns.net"));
+         //vSeeds.push_back(CDNSSeedData("192.168.100.2", "192.168.100.2"));
