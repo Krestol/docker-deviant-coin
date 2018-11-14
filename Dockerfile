@@ -29,7 +29,7 @@ RUN cd openssl-1.0.1f && ./config && make && make install_sw
 RUN apt-get install -y bsdmainutils 
 RUN cd ./Source && chmod +x autogen.sh && ./autogen.sh && \
 export LDFLAGS=-L/usr/local/ssl/lib && export CPPFLAGS=-I/usr/local/ssl/include && export PKG_CONFIG_PATH=/usr/local/ssl/lib/pkgconfig &&\
-./configure --with-gui=no
+./configure --with-gui=no --with-unsupported-ssl
 
 #build
 RUN chmod +x ./Source/src/leveldb/build_detect_platform && ./Source/share/genbuild.sh && make
