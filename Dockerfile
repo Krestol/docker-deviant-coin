@@ -3,10 +3,17 @@ MAINTAINER kotik <obrbkru@apriorit.com>
 
 #install custom packages
 RUN apt-get -q update
-RUN apt-get install -y software-properties-common && add-apt-repository -y ppa:bitcoin/bitcoin
-RUN apt-get update && apt-get install -y build-essential libtool autotools-dev autoconf pkg-config libevent-dev automake
-RUN apt-get install -y libboost-all-dev
+
+#install libdb4.8
+#--software-properties-common for adding add-apt-repository
+RUN apt-get install -y software-properties-common && add-apt-repository -y ppa:bitcoin/bitcoin && apt-get update
 RUN apt-get install -y libdb4.8-dev libdb4.8++-dev
+#--remove software-properties-common because it install openssl with wrong version
+RUN apt-get remove -y software-properties-common
+
+#install dependencies
+RUN apt-get install -y build-essential libtool autotools-dev autoconf pkg-config libevent-dev automake
+RUN apt-get install -y libboost-all-dev
 RUN apt-get install -y git
 
 #Download and build Deviant coin from branch code_correction
