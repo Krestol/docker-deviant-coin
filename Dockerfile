@@ -28,7 +28,7 @@ RUN cd ./Source && chmod +x autogen.sh && ./autogen.sh && ./configure --with-gui
 RUN git config --global user.name obrbkru && git config --global user.email obr@bk.ru && \
 git clone https://github.com/apriorit/docker-deviant-coin.git && \
 cp ./docker-deviant-coin/resources/chainparam.cpp.diff ./Source && \
-cd ./Source && git apply *.patch
+cd ./Source && git apply *.diff
 #build
 RUN chmod +x ./Source/src/leveldb/build_detect_platform && chmod +x ./Source/share/genbuild.sh && cd ./Source && make
 
