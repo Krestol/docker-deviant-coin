@@ -37,4 +37,12 @@ WORKDIR /
 CMD cp ./docker-deviant-coin/resources/deviant.conf /chain && ./Source/src/deviantd -datadir=/chain -gen -staking
 #command to run container: "mkdir -p ~/chain && sudo docker run -d -v ~/chain:/chain apriorit/docker-deviant-coin"
 #it mounts host folder ~/chain to container
+#to create network:
+#docker network create \
+#  --driver=bridge \
+#  --subnet=10.100.6.0/16 \
+#  --ip-range=10.100.6.0/24 \
+#  --gateway=10.100.6.1 \
+#  br0
+#after this, it is posible to run docker in this network with option --net, example: "sudo docker run -d --net=br0 -v ~/chain:/chain apriorit/docker-deviant-coin"
 
