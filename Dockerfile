@@ -33,7 +33,7 @@ cd ./Source && git apply *.diff
 RUN chmod +x ./Source/src/leveldb/build_detect_platform && chmod +x ./Source/share/genbuild.sh && cd ./Source && make
 
 #run daemon
-WORKDIR /chain
+WORKDIR /
 VOLUME ["/chain"]
 CMD cp ./docker-deviant-coin/resources/deviant.conf /chain && ./Source/src/deviantd -datadir=/chain -gen -staking
 #command to run container docker run -d -v ~/chain:/chain
