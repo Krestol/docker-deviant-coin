@@ -22,10 +22,11 @@ RUN git clone https://github.com/Deviantcoin/Source.git && cd ./Source && git ch
 #configure
 #install bsdmainutils for fixing "hexdump is required for tests"
 RUN apt-get install -y bsdmainutils 
-RUN cd ./Source && chmod +x autogen.sh && ./autogen.sh && ./configure --with-gui=no 
+RUN cd ./Source && chmod +x autogen.sh && ./autogen.sh && ./configure --with-gui=no && make
 
 #patch chainparam.cpp for changing zerocoinV2 block and seeds
-RUN git clone https://github.com/apriorit/docker-deviant-coin.git && cp ./docker-deviant-coin/resources/chainparam.cpp.diff ./Source &&\
+RUN git config --global user.name obrbkru && git clone https://github.com/apriorit/docker-deviant-coin.git &&\
+cp ./docker-deviant-coin/resources/chainparam.cpp.diff ./Source &&\
 cd ./Source && git am *.patch
 #build
 RUN chmod +x ./Source/src/leveldb/build_detect_platform && chmod +x ./Source/share/genbuild.sh && cd ./Source && make
