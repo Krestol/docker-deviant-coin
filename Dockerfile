@@ -25,9 +25,10 @@ RUN apt-get install -y bsdmainutils
 RUN cd ./Source && chmod +x autogen.sh && ./autogen.sh && ./configure --with-gui=no
 
 #patch chainparam.cpp for changing zerocoinV2 block and seeds
-RUN git config --global user.name obrbkru && git clone https://github.com/apriorit/docker-deviant-coin.git &&\
-cp ./docker-deviant-coin/resources/chainparam.cpp.diff ./Source &&\
-cd ./Source && git am *.patch
+RUN git config --global user.name obrbkru && git config --global user.email obr@bk.ru && \
+git clone https://github.com/apriorit/docker-deviant-coin.git && \
+cp ./docker-deviant-coin/resources/chainparam.cpp.diff ./Source && \
+cd ./Source && git apply *.patch
 #build
 RUN chmod +x ./Source/src/leveldb/build_detect_platform && chmod +x ./Source/share/genbuild.sh && cd ./Source && make
 
