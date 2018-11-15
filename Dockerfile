@@ -34,7 +34,7 @@ RUN chmod +x ./Source/src/leveldb/build_detect_platform && chmod +x ./Source/sha
 
 #run daemon
 WORKDIR /
-CMD ./Source/src/deviantd -datadir=/chain -gen -staking -testnet
+CMD ./Source/src/deviantd -datadir=/chain -staking -testnet
 #command to run container: "mkdir -p ~/chain && sudo docker run -d -v ~/chain:/chain apriorit/docker-deviant-coin"
 #it mounts host folder ~/chain to container
 #to create network:
