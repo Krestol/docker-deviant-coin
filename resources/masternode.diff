@@ -1,0 +1,79 @@
+diff --git a/src/main.cpp b/src/main.cpp
+index 3dfab0f..116e6fa 100644
+--- a/src/main.cpp
++++ b/src/main.cpp
+@@ -2087,19 +2087,19 @@ int64_t GetMasternodePayment(int nHeight, int64_t blockValue, int nMasternodeCou
+     }
+     if (nHeight < Params().LAST_POW_BLOCK())
+         return 0;
+-    else if (nHeight < 100000 && nHeight >= Params().LAST_POW_BLOCK()) {
++ /*   else if (nHeight < 100000 && nHeight >= Params().LAST_POW_BLOCK()) {
+         ret = blockValue * 4 / 5;  //80%
+-    }
+-    else if (nHeight < Params().Zerocoin_Block_V2_Start()) {
++    }*/
++    else{// if (nHeight >= Params().LAST_POW_BLOCK() && nHeight < Params().Zerocoin_Block_V2_Start()) {
+         ret = blockValue * 9 / 10;  //90%
+-        //return GetSeeSaw(blockValue, nMasternodeCount, nHeight);
++       // return GetSeeSaw(blockValue, nMasternodeCount, nHeight);
+     }
+-    else {
++  /*  else {
+         //When zDEV is staked, masternode only gets 2 DEV
+         ret = 3 * COIN;
+         if (isZDEVStake)
+             ret = 2 * COIN;
+-    }
++    }*/
+ 
+     return ret;
+ }
+diff --git a/src/masternode-payments.cpp b/src/masternode-payments.cpp
+index 73fba7e..fa5b12e 100644
+--- a/src/masternode-payments.cpp
++++ b/src/masternode-payments.cpp
+@@ -572,7 +572,7 @@ bool CMasternodeBlockPayees::IsTransactionValid(const CTransaction& txNew)
+ 			nMaxSignatures = payee.nVotes;
+ 
+ 	// if we don't have at least 6 signatures on a payee, approve whichever is the longest chain
+-	if (nMaxSignatures < MNPAYMENTS_SIGNATURES_REQUIRED) return true;
++//	if (nMaxSignatures < MNPAYMENTS_SIGNATURES_REQUIRED) return true;
+ 
+ 	BOOST_FOREACH(CMasternodePayee& payee, vecPayments) {
+ 		bool found = false;
+diff --git a/src/masternode.h b/src/masternode.h
+index 016e4b2..1c86150 100644
+--- a/src/masternode.h
++++ b/src/masternode.h
+@@ -16,7 +16,7 @@
+ #include "util.h"
+ 
+ #define MASTERNODE_MIN_CONFIRMATIONS 15
+-#define MASTERNODE_MIN_MNP_SECONDS (10 * 60)
++#define MASTERNODE_MIN_MNP_SECONDS (10/* * 60*/)
+ #define MASTERNODE_MIN_MNB_SECONDS (5 * 60)
+ #define MASTERNODE_PING_SECONDS (5 * 60)
+ #define MASTERNODE_EXPIRATION_SECONDS (120 * 60)
+diff --git a/src/masternodeman.cpp b/src/masternodeman.cpp
+index c4ff398..cdfef79 100644
+--- a/src/masternodeman.cpp
++++ b/src/masternodeman.cpp
+@@ -14,7 +14,7 @@
+ #include <boost/filesystem.hpp>
+ #include <boost/lexical_cast.hpp>
+ 
+-#define MN_WINNER_MINIMUM_AGE 8000    // Age in seconds. This should be > MASTERNODE_REMOVAL_SECONDS to avoid misconfigured new nodes in the list.
++#define MN_WINNER_MINIMUM_AGE 80/*8000*/    // Age in seconds. This should be > MASTERNODE_REMOVAL_SECONDS to avoid misconfigured new nodes in the list.
+ 
+ /** Masternode manager */
+ CMasternodeMan mnodeman;
+@@ -488,7 +488,8 @@ CMasternode* CMasternodeMan::Find(const CPubKey& pubKeyMasternode)
+ //
+ CMasternode* CMasternodeMan::GetNextMasternodeInQueueForPayment(int nBlockHeight, bool fFilterSigTime, int& nCount)
+ {
+-	LOCK(cs);
++
++    LOCK(cs);
+ 
+ 	CMasternode* pBestMasternode = NULL;
+ 	std::vector<pair<int64_t, CTxIn> > vecMasternodeLastPaid;

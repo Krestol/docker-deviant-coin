@@ -1,0 +1,23 @@
+diff --git a/src/chainparams.cpp b/src/chainparams.cpp
+index 37a0117..ea795ef 100755
+--- a/src/chainparams.cpp
++++ b/src/chainparams.cpp
+@@ -358,13 +358,15 @@ public:
+         nTargetTimespan = 24 * 60 * 60; // Deviant: 1 day
+         nTargetSpacing = 1 * 60;        // Deviant: 1 minutes
+         bnProofOfWorkLimit = ~uint256(0) >> 1;
+-        genesis.nTime = 1501776000; // Thursday, August 3, 2017 4:00:00 PM GMT
++        genesis.nTime = 1501775000;//1501776000; // Thursday, August 3, 2017 4:00:00 PM GMT
+         genesis.nBits = 0x1e0ffff0;
+-        genesis.nNonce = 1409288;
++        genesis.nNonce = 155014;//1409288;
++
++        nBlockZerocoinV2 = 600;
+ 
+         hashGenesisBlock = genesis.GetHash();
+         nDefaultPort = 51486;
+-        assert(hashGenesisBlock == uint256("0x00000cc1b527ca81f89209587a7d343f2578b2bc3bab157a8709a65263f38f1d"));
++        //assert(hashGenesisBlock == uint256("0x00000cc1b527ca81f89209587a7d343f2578b2bc3bab157a8709a65263f38f1d"));
+ 
+         vFixedSeeds.clear(); //! Testnet mode doesn't have any fixed seeds.
+         vSeeds.clear();      //! Testnet mode doesn't have any DNS seeds.

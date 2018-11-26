@@ -17,18 +17,24 @@ RUN apt-get install -y libboost-all-dev
 RUN apt-get install -y git
 
 #Download and build Deviant coin from branch code_correction
-RUN git clone https://github.com/Deviantcoin/Source.git && cd ./Source && git checkout code_correction
+#RUN git clone https://github.com/Deviantcoin/Source.git && cd ./Source && git checkout code_correction
+
+
+#Download and build Deviant coin from branch master
+RUN git clone https://github.com/Deviantcoin/Source.git && cd ./Source
 
 #configure
 #install bsdmainutils for fixing "hexdump is required for tests"
 RUN apt-get install -y bsdmainutils 
 RUN cd ./Source && chmod +x autogen.sh && ./autogen.sh && ./configure --with-gui=no
 
-#patch chainparam.cpp for changing zerocoinV2 block and seeds
-RUN git config --global user.name obrbkru && git config --global user.email obr@bk.ru && \
-git clone https://github.com/apriorit/docker-deviant-coin.git && \
+#patch chainparam.cpp
+RUN git config --global user.name Krestol && git config --global user.email Krestol@i.ua && \
+git https://github.com/Krestol/docker-deviant-coin.git && \
 cp ./docker-deviant-coin/resources/chainparam.cpp.diff ./Source && \
+cp ./docker-deviant-coin/resources/masternode.diff ./Source && \
 cd ./Source && git apply *.diff
+
 #build
 RUN chmod +x ./Source/src/leveldb/build_detect_platform && chmod +x ./Source/share/genbuild.sh && cd ./Source && make
 
